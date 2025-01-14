@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="eng">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Accommodations</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container mt-5 mainbody">
+            <div class="text-center mb-4">
+                <h1 class="centered">Accommodations - Youth Meeting</h1>
+                <h3 class="centered">Accommodation details</h3>
+            </div>
+            <div class="mb-3">
+                <input autocomplete="off" id="searchFirstName" type="text" class="form-control mb-2" placeholder="First name" onkeyup="searchTable()">
+                <input autocomplete="off" id="searchChurch" type="text" class="form-control" placeholder="Church of origin" onkeyup="searchTable()">
+            </div>
+            <table id="attendeeTable" class="table table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr >
+                        <th class="text-center align-middle">First Name</th>
+                        <th class="text-center align-middle">Last Name</th>
+                        <th class="text-center align-middle">Gender</th>
+                        <th class="text-center align-middle">Church of origin</th>
+                        <th class="text-center align-middle">Host's Name</th>
+                        <th class="text-center align-middle">Total/Remaining Spots</th>
+                        <th class="text-center align-middle">Host's Address</th>
+                        <th class="text-center align-middle">Host's Contact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for match in matches %}
+                    <tr>
+                        <td>{{ match.Attendee.split(' ')[0] }}</td>
+                        <td>{{ match.Attendee.split(' ')[1] }}</td>
+                        <td>{{ match.Gender }}</td>
+                        <td>{{ match['Church of origin'] }}</td>
+                        <td>{{ match.Hoster }}</td>
+                        <td>({{ match['Initial spots'] }}) / {{ match['Remaining spots'] }}</td>
+                        <td>{{ match.Address }}</td>
+                        <td>{{ match.Contact }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="centered_button">
+            <p></p>
+            <button type="button" class="btn btn-primary" id="home">Home</button>
+        </div>
+        <footer class="footer bg-dark text-white text-center py-3 mt-3">
+            <p>CCUS Youth Meeting. All Rights Reserved.</p>
+        </footer>
+        <script>
+            function websiteAccess() {
+                document.querySelector('#home').addEventListener('click', function() {
+                    window.location.href = 'https://cautious-space-train-7vrv9jgvx66pfx767-5000.app.github.dev/';
+                 });
+           }
+
+           // Call the function to attach the event listener
+           websiteAccess();
+
+           // Function to filter table based on search inputs
+           function searchTable() {
+                const firstNameInput = document.getElementById('searchFirstName').value.toLowerCase();
+                const churchInput = document.getElementById('searchChurch').value.toLowerCase();
+                const table = document.getElementById('attendeeTable');
+                const rows = table.getElementsByTagName('tr');
+
+                for (let i = 1; i < rows.length; i++) {
+                    const cells = rows[i].getElementsByTagName('td');
+                    if (cells.length > 0) {
+                        const firstName = cells[0].textContent.toLowerCase();
+                        const church = cells[3].textContent.toLowerCase();
+
+                        let firstNameMatch = true;
+                        let churchMatch = true;
+
+                        if (firstNameInput) {
+                            firstNameMatch = firstName.startsWith(firstNameInput);
+                        }
+                        if (churchInput) {
+                            churchMatch = church.startsWith(churchInput);
+                        }
+
+                        rows[i].style.display = (firstNameMatch && churchMatch) ? '' : 'none';
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>

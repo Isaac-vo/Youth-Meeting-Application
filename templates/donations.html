@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="eng">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Donations</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container mt-5 mainbody">
+            <div class="text-center mb-4">
+                <h1 class="centered">Hotel donations</h1>
+            </div>
+            <table class="table table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr >
+                        <th class="text-center align-middle">First Name</th>
+                        <th class="text-center align-middle">Cell phone</th>
+                        <th class="text-center align-middle">Additional Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for donor in donors %}
+                    <tr>
+                        <td class="text-center align-middle">{{ donor['First name'] }}</td>
+                        <td class="text-center align-middle">{{ donor['Cell phone #'] }}</td>
+                        <td class="text-center align-middle">{{ donor['Additional notes (comentários adicionais)'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="centered_button">
+            <p></p>
+            <button type="button" class="btn btn-primary" id="home">Home</button>
+        </div>
+        <footer class="footer bg-dark text-white text-center py-3 mt-3">
+            <p>CCUS Youth Meeting. All Rights Reserved.</p>
+        </footer>
+        <script>
+            function websiteAccess() {
+                document.querySelector('#home').addEventListener('click', function() {
+                    window.location.href = 'https://cautious-space-train-7vrv9jgvx66pfx767-5000.app.github.dev/';
+                 });
+           }
+           // Call the function to attach the event listener
+           websiteAccess();
+        </script>
+    </body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="eng">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Drive</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container mt-5 mainbody">
+            <div class="text-center mb-4">
+                <h1 class="centered">Pick up / Drop off</h1>
+                <h3 class="centered">Attendees' information</h3>
+            </div>
+            <div class="mb-3">
+                <input autocomplete="off" id="searchFirstName" type="text" class="form-control mb-2" placeholder="First name" onkeyup="searchTable()">
+                <input autocomplete="off" id="searchAirportArrival" type="text" class="form-control" placeholder="Airport" onkeyup="searchTable()">
+            </div>
+            <table id="attendeeTable" class="table table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr >
+                        <th class="text-center align-middle">First Name</th>
+                        <th class="text-center align-middle">Last Name</th>
+                        <th class="text-center align-middle">Cell phone</th>
+                        <th class="text-center align-middle">Airport (Arrival)</th>
+                        <th class="text-center align-middle">Flight</th>
+                        <th class="text-center align-middle">Date / Time</th>
+                        <th class="text-center align-middle">Airport (Departure)</th>
+                        <th class="text-center align-middle">Flight</th>
+                        <th class="text-center align-middle">Date / Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for attendee in attendees  %}
+                    <tr>
+                        <td class="text-center align-middle">{{ attendee['First name'] }}</td>
+                        <td class="text-center align-middle">{{ attendee['Last name'] }}</td>
+                        <td class="text-center align-middle">{{ attendee['Cell phone #'] }}</td>
+                        <td class="text-center align-middle">{{ attendee['Airport of arrival (if arriving by car, please select Car)'] }}</td>
+                        <td class="text-center align-middle">{{ attendee['Airline name and flight - Arrival # (if by plane)'] }}</td>
+                        <td class="text-center align-middle">{{ attendee['Arrival date'] }} at {{ attendee['Arrival time'] }}</td>
+                        <td class="text-center align-middle">{{ attendee['Airport of departure (if departing by car, please select Car)'] }}</td>
+                        <td class="text-center align-middle">{{ attendee['Airline name and flight - Departure # (if by plane)'] }}</td>
+                        <td class="text-center align-middle">{{ attendee['Departure date'] }} at {{ attendee['Departure time'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="centered_button">
+            <p></p>
+            <button type="button" class="btn btn-primary" id="home">Home</button>
+        </div>
+        <footer class="footer bg-dark text-white text-center py-3 mt-3">
+            <p>CCUS Youth Meeting. All Rights Reserved.</p>
+        </footer>
+        <script>
+            function websiteAccess() {
+                document.querySelector('#home').addEventListener('click', function() {
+                    window.location.href = 'https://cautious-space-train-7vrv9jgvx66pfx767-5000.app.github.dev/';
+                 });
+           }
+
+           // Cakk the function to attach the event listener
+           websiteAccess();
+
+           // Function to filter table based on search inputs
+           function searchTable() {
+                const firstNameInput = document.getElementById('searchFirstName').value.toLowerCase();
+                const airportArrivalInput = document.getElementById('searchAirportArrival').value.toLowerCase();
+                const table = document.getElementById('attendeeTable');
+                const rows = table.getElementsByTagName('tr');
+
+                for (let i = 1; i < rows.length; i++) {
+                    const cells = rows[i].getElementsByTagName('td');
+                    if (cells.length > 0) {
+                        const firstName = cells[0].textContent.toLowerCase();
+                        const airportArrival = cells[3].textContent.toLowerCase();
+
+                        let firstNameMatch = true;
+                        let airportArrivalMatch = true;
+
+                        if (firstNameInput) {
+                            firstNameMatch = firstName.startsWith(firstNameInput);
+                        }
+                        if (airportArrivalInput) {
+                            airportArrivalMatch = airportArrival.startsWith(airportArrivalInput);
+                        }
+
+                        rows[i].style.display = (firstNameMatch && airportArrivalMatch) ? '' : 'none';
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Youth Meeting</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+    </head>
+    <body>
+        <header class="bg-primary text-white">
+            <div class="text-center py-4">
+                <h1>Control Panel</h1>
+                <h5>CCUS - Youth Metting</h5>
+            </div>
+        </header>
+        <p></p>
+        <div style="width:55%; margin-left:auto; margin-right:auto; padding:10px; border:1px solid #ccc;">
+            <table class="table table-bordered mt-4" style="width:100%; margin-left: auto; margin-right: auto;">
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="text-center">Foreign attendees</th>
+                        <th class="text-center">Maryland attendees</th>
+                        <th class="text-center">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center">{{ non_maryland_count }}</td>
+                        <td class="text-center">{{ maryland_count }}</td>
+                        <td class="text-center">{{ total_count }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="mt-4 mainbody">
+            <div class="text-center mb-4">
+                <p>Select an option to manage:</p>
+                <button type="button" class="btn btn-primary" id="accommodations">Accommodations</button>
+                <button type="button" class="btn btn-primary" id="hotel">Hotels</button>
+                <button type="button" class="btn btn-primary" id="donations">Donations</button>
+                <button type="button" class="btn btn-primary" id="drive">Pick up / Drop off</button>
+            </div>
+        </div>
+        <footer class="footer bg-dark text-white text-center py-3 mt-5">
+            <p>CCUS Youth Meeting. All Rights Reserved.</p>
+        </footer>
+        <script>
+            function websiteAccess() {
+                    document.querySelector('#accommodations').addEventListener('click', function() {
+                        window.location.href = 'https://cautious-space-train-7vrv9jgvx66pfx767-5000.app.github.dev/accommodations';
+                    });
+
+                    document.querySelector('#hotel').addEventListener('click', function() {
+                        window.location.href = 'https://cautious-space-train-7vrv9jgvx66pfx767-5000.app.github.dev/hotels';
+                    });
+
+                    document.querySelector('#donations').addEventListener('click', function() {
+                        window.location.href = 'https://cautious-space-train-7vrv9jgvx66pfx767-5000.app.github.dev/donations';
+                    });
+
+                    document.querySelector('#drive').addEventListener('click', function() {
+                        window.location.href = 'https://cautious-space-train-7vrv9jgvx66pfx767-5000.app.github.dev/drive';
+                    });
+            }
+
+           // Cakk the function to attach the event listener
+           websiteAccess();
+        </script>
+    </body>
+</html>
