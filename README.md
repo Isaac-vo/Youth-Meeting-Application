@@ -20,7 +20,7 @@ The application was created to **automate all the accommodations** between atten
     - Database1.db
     - Database2.db
     - README.md
-    - youth-meeting-attendees2.json
+    - service_account.json
 
 ### Static (folder)
 The Static (folder) contains the ***"style.css"*** file, used to edit the front-end of our application. It enhances the design of our app.
