@@ -3,7 +3,7 @@
 (https://youtu.be/Bxsuu0_KpZ0)
 
 #### Description:
-Hello there! My name is Isaac Veneruci de Oliveira and this is my **Final Project for CS50: Introduction to Computer Science**. In this text file, you will find all the details about the web-based application developed to help my local church during the Youth Meeting Events. That being said, let's dive into it.
+Hello there! My name is Isaac Venerucci de Oliveira and this is my **Final Project for CS50: Introduction to Computer Science**. In this text file, you will find all the details about the web-based application developed to help my local church during the Youth Meeting Events. That being said, let's dive into it.
 
 The **"Youth Meeting app"** is a web-based application built with the ***"Flask" microframework***, incorporating different programming languages such as Python (main), SQL, JavaScript, and HTML (Markup Language).
 
